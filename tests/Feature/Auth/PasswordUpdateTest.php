@@ -17,9 +17,7 @@ test('password can be updated', function () {
         ->set('password_confirmation', 'new-password')
         ->call('updatePassword');
 
-    $component
-        ->assertHasNoErrors()
-        ->assertNoRedirect();
+    $component->assertHasNoErrors()->assertNoRedirect();
 
     $this->assertTrue(Hash::check('new-password', $user->refresh()->password));
 });
@@ -35,7 +33,5 @@ test('correct password must be provided to update password', function () {
         ->set('password_confirmation', 'new-password')
         ->call('updatePassword');
 
-    $component
-        ->assertHasErrors(['current_password'])
-        ->assertNoRedirect();
+    $component->assertHasErrors(['current_password'])->assertNoRedirect();
 });

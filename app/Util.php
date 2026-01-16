@@ -16,7 +16,8 @@ trait Util
         return Crypt::decryptString($id);
     }
 
-    public static function uploadSingleFile($file, $directory = 'uploads'): string {
+    public static function uploadSingleFile($file, $directory = 'uploads'): string
+    {
         if (env('APP_ENV') === 'production') {
             return 'storage/app/public/' . $file->store(path: $directory);
         } else {
@@ -24,7 +25,8 @@ trait Util
         }
     }
 
-    public static function uploadMultipleFiles($files, $directory = 'uploads'): string {
+    public static function uploadMultipleFiles($files, $directory = 'uploads'): string
+    {
         $paths = [];
         foreach ($files as $file) {
             if (env('APP_ENV') === 'production') {
