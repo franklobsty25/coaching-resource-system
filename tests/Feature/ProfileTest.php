@@ -27,9 +27,7 @@ test('profile information can be updated', function () {
         ->set('email', 'test@example.com')
         ->call('updateProfileInformation');
 
-    $component
-        ->assertHasNoErrors()
-        ->assertNoRedirect();
+    $component->assertHasNoErrors()->assertNoRedirect();
 
     $user->refresh();
 
@@ -48,9 +46,7 @@ test('email verification status is unchanged when the email address is unchanged
         ->set('email', $user->email)
         ->call('updateProfileInformation');
 
-    $component
-        ->assertHasNoErrors()
-        ->assertNoRedirect();
+    $component->assertHasNoErrors()->assertNoRedirect();
 
     $this->assertNotNull($user->refresh()->email_verified_at);
 });
@@ -60,13 +56,9 @@ test('user can delete their account', function () {
 
     $this->actingAs($user);
 
-    $component = Volt::test('profile.delete-user-form')
-        ->set('password', 'password')
-        ->call('deleteUser');
+    $component = Volt::test('profile.delete-user-form')->set('password', 'password')->call('deleteUser');
 
-    $component
-        ->assertHasNoErrors()
-        ->assertRedirect('/');
+    $component->assertHasNoErrors()->assertRedirect('/');
 
     $this->assertGuest();
     $this->assertNull($user->fresh());
@@ -77,13 +69,9 @@ test('correct password must be provided to delete account', function () {
 
     $this->actingAs($user);
 
-    $component = Volt::test('profile.delete-user-form')
-        ->set('password', 'wrong-password')
-        ->call('deleteUser');
+    $component = Volt::test('profile.delete-user-form')->set('password', 'wrong-password')->call('deleteUser');
 
-    $component
-        ->assertHasErrors('password')
-        ->assertNoRedirect();
+    $component->assertHasErrors('password')->assertNoRedirect();
 
     $this->assertNotNull($user->fresh());
 });

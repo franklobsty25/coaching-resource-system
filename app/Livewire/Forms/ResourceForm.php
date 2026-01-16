@@ -53,7 +53,6 @@ class ResourceForm extends Form
         $this->type = $resource->type;
     }
 
-
     public function store()
     {
         $this->validate();

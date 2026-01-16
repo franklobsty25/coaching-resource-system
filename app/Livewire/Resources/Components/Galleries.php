@@ -19,7 +19,7 @@ class Galleries extends Component
     public function mount(string $resourceId)
     {
         $this->resource = Resource::firstWhere('id', $this->decrypt($resourceId));
-        $this->urls = explode("|", $this->resource->paths);
+        $this->urls = explode('|', $this->resource->paths);
         $this->isImage = ResourceTypeEnum::Image->value === $this->resource->type;
     }
 

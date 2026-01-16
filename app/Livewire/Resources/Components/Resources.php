@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 class Resources extends Component
 {
     use WithPagination, Util;
+
     protected $paginationTheme = 'bootstrap';
 
     public $category = null;
@@ -29,17 +30,15 @@ class Resources extends Component
 
     public function render()
     {
-        $resources = Resource::when($this->category, function ($query) {
-            return $query
-                ->where('type', $this->category)
-                ->latest()
-                ->paginate($this->perPage);
-        },
+        $resources = Resource::when(
+            $this->category,
             function ($query) {
-                return $query
-                    ->latest()
-                    ->paginate($this->perPage);
-            });
+                return $query->where('type', $this->category)->latest()->paginate($this->perPage);
+            },
+            function ($query) {
+                return $query->latest()->paginate($this->perPage);
+            },
+        );
 
         return view('livewire.resources.components.resources', compact('resources'));
     }

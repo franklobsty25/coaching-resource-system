@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Resource;
 use App\Models\User;
 use App\ResourceTypeEnum;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 
 class ResourceSeeder extends Seeder
@@ -18,17 +18,16 @@ class ResourceSeeder extends Seeder
         $types = collect(ResourceTypeEnum::cases())->pluck('value')->toArray();
 
         for ($i = 1; $i <= 50; $i++) {
-
             $type = $types[array_rand($types)];
 
             $pathUrl = $this->getTypeUrl($type);
 
             Resource::create([
-                'title'       => ucfirst($type) . " Resource " . $i,
+                'title' => ucfirst($type) . ' Resource ' . $i,
                 'description' => "This is a sample description for {$type} resource number {$i}.",
-                'type'        => $type,
-                'paths'       => $pathUrl,
-                'user_id'     => (User::first())->id,
+                'type' => $type,
+                'paths' => $pathUrl,
+                'user_id' => User::first()->id,
             ]);
         }
     }

@@ -16,13 +16,11 @@ class Chartjs extends Component
 
     public function mount()
     {
-        $counts = Resource::select('type', DB::raw('COUNT(*) as total'))
-            ->groupBy('type')
-            ->pluck('total', 'type');
+        $counts = Resource::select('type', DB::raw('COUNT(*) as total'))->groupBy('type')->pluck('total', 'type');
 
         $this->totalAudios = $counts[ResourceTypeEnum::Audio->value] ?? 0;
         $this->totalVideos = $counts[ResourceTypeEnum::Video->value] ?? 0;
-        $this->totalPdfs   = $counts[ResourceTypeEnum::Pdf->value] ?? 0;
+        $this->totalPdfs = $counts[ResourceTypeEnum::Pdf->value] ?? 0;
         $this->totalImages = $counts[ResourceTypeEnum::Image->value] ?? 0;
     }
 

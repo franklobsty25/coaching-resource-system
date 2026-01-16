@@ -14,6 +14,7 @@
         "spatie/laravel-permission": "^6.24"
     },
     "require-dev": {
+        "carthage-software/mago": "^1.1",
         "fakerphp/faker": "^1.23",
         "laradumps/laradumps": "^5.0",
         "laravel/breeze": "^2.3",
@@ -84,7 +85,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "carthage-software/mago": true
         }
     },
     "minimum-stability": "stable",
